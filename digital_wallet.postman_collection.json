@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "5b020475-2ebc-4340-99b2-95c218853b1a",
+		"name": "digital_wallet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5801655"
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "createUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"yoav\",\r\n    \"email\": \"yoav@gmail.com\",\r\n    \"creditCardNumber\": \"123456789\",\r\n    \"idCardNumber\": \"230548152\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/api/v1/users",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "groups",
+			"item": [
+				{
+					"name": "createGroup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Hila's birthday\",\r\n    \"title\": \"she wants makeup\",\r\n    \"ownerUserId\": \"ed32c788-c498-4de2-88c7-648971c5bddc\",\r\n    \"members\": [\r\n        {\r\n            \"userId\": \"3eedd899-d4b9-44b4-955d-c733e4a854f4\",\r\n            \"transferSum\": null\r\n        },\r\n        {\r\n            \"userId\": \"9f5bbef7-6abc-4bcb-a230-9b9aa61cd75c\",\r\n            \"transferSum\": null\r\n        }\r\n    ],\r\n    \"sumType\": \"flex\",\r\n    \"sumOptions\": [\r\n        {\r\n            \"title\": \"test1\",\r\n            \"subtitle\": \"test2\",\r\n            \"amount\": 10,\r\n            \"sum\": 80\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/v1/groups",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"v1",
+								"groups"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transaction",
+			"item": [
+				{
+					"name": "createTransactionFromUserToUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 235,\r\n    \"isChargeFromBalance\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/transactions/users/dbaed842-7e5b-4aa7-b2d3-57a3b38dcde9/to/e25dd4df-28d9-463d-8875-5a7145f70e4d",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"users",
+								"dbaed842-7e5b-4aa7-b2d3-57a3b38dcde9",
+								"to",
+								"e25dd4df-28d9-463d-8875-5a7145f70e4d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createTransactionFromUserToGroup",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": 100,\r\n    \"isChargeFromBalance\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/transactions/users/6019ae63-de98-42a9-be22-754460c2185a/groups/cb42812a-1b36-4b8f-aa68-981348580b65",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"users",
+								"6019ae63-de98-42a9-be22-754460c2185a",
+								"groups",
+								"cb42812a-1b36-4b8f-aa68-981348580b65"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transactionGroupWithdraw",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/transactions/groups/df7eb009-41bf-4b90-8646-0827dcb85146/withdraw",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"groups",
+								"df7eb009-41bf-4b90-8646-0827dcb85146",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transactionUserWithdraw",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/transactions/users/df7eb009-41bf-4b90-8646-0827dcb85146/withdraw",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"users",
+								"df7eb009-41bf-4b90-8646-0827dcb85146",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "approveTransaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3003/api/v1/transactions/f55a8df7-6e58-4035-9fe8-1ffbffee141e/approve?isFromBalance=true",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"f55a8df7-6e58-4035-9fe8-1ffbffee141e",
+								"approve"
+							],
+							"query": [
+								{
+									"key": "isFromBalance",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "denyTransaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3003/api/v1/transactions/dcf4e8da-441f-4838-97d4-68e5f56e2540/deny",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3003",
+							"path": [
+								"api",
+								"v1",
+								"transactions",
+								"dcf4e8da-441f-4838-97d4-68e5f56e2540",
+								"deny"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
