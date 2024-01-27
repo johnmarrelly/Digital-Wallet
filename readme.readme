@@ -1,0 +1,52 @@
+# Digital wallet
+
+API for creating transactions between users.
+The communication between these services are made by 2 protocols: restful (http) and message broker (rabbitMQ).
+
+I've created 4 micro-services: user-service, transaction-service, group-service and notification-service.
+
+user-service: A service that handles all user details such as email, bank account, etc...
+
+group-service: A service that handles group details and all users within a group.
+
+transaction-service: The core service that handles all user transactions, user to user, user to a group, withdraw from user account and widthdraw from group.
+
+notification-service: I haven't implemented the notification service, basically it should be straight forward and is the same as I did with the communication between other services, we will use a message broker to send notification based on the sender and receiver user details.
+
+Note: I would use docker to run all services and connect to mongoDB.
+
+## Installation
+
+Go to each microservice (except the notification-service) directory and run these commands.
+
+```bash
+npm install
+```
+```bash
+npm run start:dev
+```
+Do it for all microservices.
+
+## Assumptions
+I have designed the application in a way that the Digital-Wallet has a central place (Bank account) where all the money is kept, meaning it has a bank account and the application's puprose is to handle charging and crediting users.
+
+## Usage
+
+I have included a postman collection to make requests to the transaction service.
+The naming of the requests are pretty self-explanatory but there are 2 things to consider when using user to user transactions:
+
+1. Transaction between USER to USER: Need to create 2 users, make a transaction following restful architecture (pretty stright forward in postman) in the url paste the user ids from and to and make the transaction.
+when the transaction is done it will make a record in both tables: transaction and transaction-history.
+in the transaction-history it will make a record with the status of the transaction (it will be pending until the receiver accepts the transaction). when a user accepts the transaction he will make a request to approve the transaction and only then the receiver will get his money.
+2. Be aware that you have a field called isChargeFromBalance meaning we can choose wether we charge the user from his wallet balance or directly from his credit card.
+
+
+## Things I would implement
+1. implement the notification service and just create a function that when a transaction is complete between users or between a user to a group it will send a notification.
+2. Run the microservices in docket containers.
+3. Add more descriptive error messages.
+4. I would add a central gateway server for security measures which control the client to server requests. 
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
